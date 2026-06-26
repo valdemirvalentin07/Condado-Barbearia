@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Condado Barbearia — tabela de cortes e serviços. Araras-SP." />
+  <title>Cortes — Condado Barbearia</title>
+
+  <link rel="icon" type="image/png" href="imagens/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/cortes.css" />
+</head>
+<body>
+
+  <header class="nav-wrap">
+    <nav class="navbar" aria-label="Principal">
+
+      <a href="index.html" class="brand" aria-label="Condado Barbearia">
+        <span class="brand-mark">
+          <img src="imagens/logo.png" alt="" />
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">CON<span class="accent">DA</span>DO</span>
+          <span class="brand-sub">Barbearia</span>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="profissionais.html">Profissionais</a></li>
+        <li><a href="cortes.html" class="active">Cortes</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+
+      <div class="right">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+          <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="page-hero-bg" aria-hidden="true"></div>
+    <div class="page-hero-inner container">
+      <span class="page-eyebrow">
+        <span class="eyebrow-line"></span>
+        Tabela de serviços
+      </span>
+      <h1 class="page-title">
+        <span class="line">Cada corte,</span>
+        <span class="line">uma <span class="red-italic">assinatura</span>.</span>
+      </h1>
+      <p class="page-desc">
+        Do clássico ao moderno — preço justo, navalha afiada
+        e acabamento que fala por si.
+      </p>
+    </div>
+    <div class="page-hero-scroll" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  
+
+  <section class="carousel-section">
+    <div class="container">
+
+      <header class="section-head reveal">
+        <span class="section-eyebrow">Barbearia Condado</span>
+        <h2 class="section-title">
+          Do clássico ao <span class="red-italic">moderno</span>.
+        </h2>
+        <p class="section-desc">Cada serviço com a navalha e o acabamento que você merece.</p>
+      </header>
+
+    </div>
+
+    <!-- Viewport sem container para sangrar nas bordas -->
+    <div class="carousel-viewport" role="region" aria-label="Cortes e serviços">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- Slide 01 -->
+        <article class="carousel-slide" data-index="0" aria-label="Corte Social">
+          <div class="slide-media">
+            <img src="imagens/corte1.jpeg" alt="Corte Social — acabamento na navalha" loading="lazy" />
+            
+          </div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+          <div class="slide-content">
+            <div class="slide-top">
+              <span class="slide-num">01</span>
+              <span class="slide-time">~30 min</span>
+            </div>
+            <div class="slide-bottom">
+              <h3 class="slide-title">Corte Social</h3>
+              <p class="slide-desc">Tesoura e máquina. Acabamento na navalha. Pra reunião, pro escritório e pra noite.</p>
+              <span class="slide-price">R$ 35</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 02 — destaque -->
+        <article class="carousel-slide carousel-slide--featured" data-index="1" aria-label="Combo Condado — mais pedido">
+          <div class="slide-media">
+            <img src="imagens/corte2.jpeg" alt="Combo Condado — corte mais barba" loading="lazy" />
+            
+          </div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+          <div class="slide-content">
+            <div class="slide-top">
+              <span class="slide-num">02</span>
+              <span class="slide-badge">Mais pedido</span>
+            </div>
+            <div class="slide-bottom">
+              <h3 class="slide-title">Combo Condado</h3>
+              <p class="slide-desc">Corte + barba + toalha quente. O pacote completo da casa. Saindo perfeito, garantido.</p>
+              <span class="slide-price">R$ 60</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 03 -->
+        <article class="carousel-slide" data-index="2" aria-label="Barba Desenhada">
+          <div class="slide-media">
+            <img src="imagens/corte4.jpeg" alt="Barba Desenhada — modelagem com navalha" loading="lazy" />
+         
+          </div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+          <div class="slide-content">
+            <div class="slide-top">
+              <span class="slide-num">03</span>
+              <span class="slide-time">~20 min</span>
+            </div>
+            <div class="slide-bottom">
+              <h3 class="slide-title">Barba Desenhada</h3>
+              <p class="slide-desc">Modelagem completa com navalha, óleo e finalização profissional.</p>
+              <span class="slide-price">R$ 30</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 04 -->
+        <article class="carousel-slide" data-index="3" aria-label="Degradê">
+          <div class="slide-media">
+            <img src="imagens/corte3.jpeg" alt="Degradê — fade limpo do zero" loading="lazy" />
+            
+          </div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+          <div class="slide-content">
+            <div class="slide-top">
+              <span class="slide-num">04</span>
+              <span class="slide-time">~25 min</span>
+            </div>
+            <div class="slide-bottom">
+              <h3 class="slide-title">Degradê</h3>
+              <p class="slide-desc">Fade limpo do zero ao comprimento desejado. Transição perfeita, linhas retas.</p>
+              <span class="slide-price">R$ 40</span>
+            </div>
+          </div>
+        </article>
+
+
+        
+        <article class="carousel-slide" data-index="4" aria-label="Corte Infantil">
+          <div class="slide-media">
+            <img src="imagens/corte5.jpeg" alt="Corte Infantil" loading="lazy" />
+          </div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+          <div class="slide-content">
+            <div class="slide-top">
+              <span class="slide-num">05</span>
+              <span class="slide-time">~45 min</span>
+            </div>
+            <div class="slide-bottom">
+              <h3 class="slide-title">Corte Infantil</h3>
+              <p class="slide-desc">Atenção e cuidado especial com os pequenos. Experiência tranquila e resultado impecável.</p>
+              <span class="slide-price">R$ 30</span>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /carousel-track -->
+    </div><!-- /carousel-viewport -->
+
+    <!-- Controles -->
+    <div class="carousel-controls container">
+      <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Navegar entre slides"></div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow carousel-arrow--prev" id="carouselPrev" aria-label="Slide anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="carousel-arrow carousel-arrow--next" id="carouselNext" aria-label="Próximo slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 6 15 12 9 18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  
+  <section class="tabela-section">
+    <div class="container">
+
+      <header class="section-head reveal">
+        <span class="section-eyebrow">Resumo</span>
+        <h2 class="section-title">Tabela de <span class="red-italic">preços</span>.</h2>
+      </header>
+
+      <div class="tabela-wrap reveal">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th>Serviço</th>
+              <th>Tempo</th>
+              <th>Preço</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="t-dot"></span>Corte Social</td>
+              <td>~30 min</td>
+              <td class="t-price">R$ 35</td>
+            </tr>
+            <tr class="t-featured">
+              <td><span class="t-dot t-dot--red"></span>Combo Condado</td>
+              <td>~50 min</td>
+              <td class="t-price">R$ 60</td>
+            </tr>
+            <tr>
+              <td><span class="t-dot"></span>Barba Desenhada</td>
+              <td>~20 min</td>
+              <td class="t-price">R$ 30</td>
+            </tr>
+            <tr>
+              <td><span class="t-dot"></span>Degradê</td>
+              <td>~25 min</td>
+              <td class="t-price">R$ 40</td>
+            </tr>
+            <tr>
+              <td><span class="t-dot"></span>Acabamento</td>
+              <td>~15 min</td>
+              <td class="t-price">R$ 20</td>
+            </tr>
+            <tr>
+              <td><span class="t-dot"></span>Corte Infantil</td>
+              <td>~45 min</td>
+              <td class="t-price">R$ 30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-tag">Sem agendamento</div>
+        <h2 class="cta-title">É só <span class="red-italic">chegar</span>.</h2>
+        <p class="cta-desc">Segunda a sábado · 09h às 20h · Domingo · 09h às 13h · Av. Loreto, 1250 — Araras/SP</p>
+        <a href="https://wa.me/5519983895919" target="_blank" rel="noopener" class="cta-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand reveal">
+          <a href="index.html" class="footer-logo" aria-label="Condado Barbearia">
+            <span class="brand-mark">
+              <img src="imagens/logo.png" alt="" />
+            </span>
+            <span class="brand-text">
+              <span class="brand-name">CON<span class="accent">DA</span>DO</span>
+              <span class="brand-sub">Barbearia</span>
+            </span>
+          </a>
+          <p class="footer-tagline">
+            Tradição na navalha,<br/>atitude na arte.
+          </p>
+          <div class="footer-socials" aria-label="Redes sociais">
+            <a class="footer-social" href="https://wa.me/5519983895919" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
+            <a class="footer-social" href="https://www.instagram.com/condado.araras/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zm5.25-2.75a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col reveal" style="--i:1">
+          <h4 class="footer-h">Contato</h4>
+          <address class="footer-text">
+            Av. Loreto, 1250<br/>
+            Jardim das Flores<br/>
+            Araras / SP
+          </address>
+          <a class="footer-link" href="https://wa.me/5519983895919" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            (19) 98389-5919
+          </a>
+        </div>
+
+        <div class="footer-col reveal" style="--i:3">
+          <h4 class="footer-h">Navegar</h4>
+          <ul class="footer-nav">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="profissionais.html">Profissionais</a></li>
+            <li><a href="cortes.html">Cortes</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Condado Barbearia · Todos os direitos reservados</span>
+        <a class="footer-tag" href="https://www.instagram.com/valentin__dev/" target="_blank" rel="noopener">Desenvolvido por @valentin__dev</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="floating-wa" href="https://wa.me/5519983895919" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <script src="js/index.js" defer></script>
+  <script src="js/cortes.js" defer></script>
+</body>
+</html>

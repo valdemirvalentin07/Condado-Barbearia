@@ -1,0 +1,1005 @@
+/* ============================================================
+   CONDADO BARBEARIA — profissionais.css v4
+   Estende index.css — sem repetir tokens, reset ou utilitários.
+   ============================================================ */
+
+/* ─── 1. HERO INNER ──────────────────────────────────────── */
+
+.hero--inner {
+  min-height: 56vh;
+  min-height: 56svh;
+  background-image:
+    linear-gradient(180deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.55) 30%,rgba(0,0,0,0.85) 100%),
+    url("../imagens/Fachadamobile.png");
+  background-size: cover;
+  background-position: center top;
+}
+
+@media (min-width: 768px) {
+  .hero--inner {
+    background-image:
+      linear-gradient(110deg,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.65) 40%,rgba(0,0,0,0.30) 75%,rgba(0,0,0,0.50) 100%),
+      linear-gradient(180deg,rgba(0,0,0,0.40) 0%,transparent 25%,rgba(0,0,0,0.60) 100%),
+      url("../imagens/Fachada.png");
+  }
+}
+
+.hero-content--inner { padding: 40px 60px 72px; align-items: flex-end; }
+
+@media (max-width: 980px) {
+  .hero-content--inner { padding: 32px 28px 56px; }
+}
+
+/* ─── 2. PROFISSIONAIS ───────────────────────────────────── */
+
+.profissionais {
+  position: relative;
+  padding: 120px 0 100px;
+  background: var(--black);
+  overflow: hidden;
+}
+
+.profissionais::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(215,35,35,0.07) 0%, transparent 45%),
+    radial-gradient(circle at 5%  85%, rgba(215,35,35,0.05) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* ─── 3. TEAM GRID ───────────────────────────────────────── */
+
+.team-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── 4. PRO CARD ────────────────────────────────────────── */
+
+.pro-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  background: var(--black-2);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.5s ease;
+}
+
+.pro-card:hover {
+  border-color: rgba(215,35,35,0.32);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 8px 28px rgba(215,35,35,0.12);
+}
+
+.pro-card::before {
+  content: attr(data-num);
+  position: absolute;
+  bottom: -0.06em; right: -0.04em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 16vw, 240px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  transition: -webkit-text-stroke 0.5s ease, opacity 0.5s ease;
+  opacity: 0.7;
+}
+
+.pro-card:hover::before {
+  -webkit-text-stroke: 1px rgba(215,35,35,0.14);
+  opacity: 1;
+}
+
+.pro-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.65s var(--ease);
+  z-index: 4;
+}
+
+.pro-card:hover::after { transform: translateX(100%); }
+
+.pro-card__photo {
+  position: relative;
+  overflow: hidden;
+  background: #0e0e0e;
+  min-height: 420px;
+}
+
+.pro-card__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+  transition: transform 1.2s cubic-bezier(0.2,0.8,0.2,1);
+  will-change: transform;
+}
+
+.pro-card:hover .pro-card__photo img { transform: scale(1.04); }
+
+.pro-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 50%, rgba(20,20,20,0.75) 100%);
+  z-index: 1;
+}
+
+.pro-card__photo::before {
+  content: '';
+  position: absolute;
+  top: -120%; left: -40%;
+  width: 45%; height: 300%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: rotate(22deg);
+  transition: transform 0.9s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.pro-card:hover .pro-card__photo::before { transform: rotate(22deg) translateX(500%); }
+
+.pro-card__num {
+  position: absolute;
+  top: 18px; left: 18px;
+  z-index: 2;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3.5px;
+  color: var(--white);
+  background: rgba(215,35,35,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pro-card__body {
+  position: relative;
+  z-index: 1;
+  padding: 44px 48px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pro-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pro-card__role {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.pro-card__exp {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(245,237,226,0.35);
+  padding: 3px 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 999px;
+}
+
+.pro-card__name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 4vw, 58px);
+  letter-spacing: 1.5px;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 16px;
+}
+
+.pro-card__name::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  transition: width 0.7s cubic-bezier(0.2,0.9,0.2,1) 0.2s;
+}
+
+.pro-card.in-view .pro-card__name::after { width: 100%; }
+
+.pro-card__bio {
+  font-size: 14px;
+  line-height: 1.72;
+  color: rgba(245,237,226,0.60);
+  max-width: 440px;
+  margin-bottom: 24px;
+}
+
+.pro-card__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.pro-card__tags li {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(245,237,226,0.65);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 999px;
+  padding: 5px 13px;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+
+.pro-card:hover .pro-card__tags li {
+  background: rgba(215,35,35,0.10);
+  border-color: rgba(215,35,35,0.28);
+  color: #ffb3b5;
+}
+
+.pro-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  background: transparent;
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.35s var(--ease), box-shadow 0.35s ease;
+}
+
+.pro-card__cta svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--red); transition: color 0.3s ease; }
+
+.pro-card__cta:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(215,35,35,0.4);
+}
+
+.pro-card__cta:hover svg { color: var(--white); }
+
+/* ─── 5. VALORES ─────────────────────────────────────────── */
+
+.valores {
+  position: relative;
+  padding: 100px 0 110px;
+  background: var(--black-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.valores::before {
+  content: '';
+  position: absolute;
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(215,35,35,0.09) 0%, transparent 65%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.valor-item {
+  position: relative;
+  padding: 48px 40px;
+  background: var(--black-2);
+  border-right: 1px solid var(--line);
+  transition: background 0.4s ease;
+  overflow: hidden;
+}
+
+.valor-item:last-child { border-right: none; }
+
+.valor-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s var(--ease);
+}
+
+.valor-item:hover { background: #130808; }
+.valor-item:hover::before { transform: scaleX(1); }
+
+.valor-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--red);
+  display: block;
+  margin-bottom: 22px;
+}
+
+.valor-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.valor-desc {
+  font-size: 14px;
+  line-height: 1.72;
+  color: rgba(245,237,226,0.58);
+}
+
+/* ─── 6. DESTAQUES — galeria editorial horizontal ────────── */
+
+.destaques {
+  position: relative;
+  padding: 100px 0 110px;
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* glow vermelho de fundo */
+.destaques::before {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 1000px; height: 400px;
+  background: radial-gradient(ellipse, rgba(215,35,35,0.07) 0%, transparent 65%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+/* ── barra de label superior ── */
+.destaques-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.destaques-label__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.destaques-label__eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.destaques-label__line {
+  width: 32px;
+  height: 1px;
+  background: var(--red);
+  opacity: 0.5;
+}
+
+.destaques-label__count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(245,237,226,0.25);
+}
+
+/* ── grid principal — 3 colunas compactas, portrait ── */
+.destaques-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── cartão foto ── */
+.destaque-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  cursor: default;
+  transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.destaque-card:hover {
+  border-color: rgba(215,35,35,0.35);
+  transform: translateY(-6px);
+}
+
+/* aspecto portrait compacto */
+.destaque-card__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #0c0c0c;
+}
+
+.destaque-card__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1), filter 0.6s ease;
+  will-change: transform;
+  filter: brightness(0.9) saturate(0.85);
+}
+
+.destaque-card:hover .destaque-card__media img {
+  transform: scale(1.07);
+  filter: brightness(1) saturate(1);
+}
+
+/* overlay em 3 camadas: base escura + gradiente vinheta + glow vermelho no hover */
+.destaque-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* camada 1 — vinheta base */
+.destaque-card__overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.05) 40%,
+      rgba(0,0,0,0.55) 100%
+    );
+}
+
+/* camada 2 — tint vermelho no hover (opacity animada via opacity do pseudo) */
+.destaque-card__overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(215,35,35,0.20) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.destaque-card:hover .destaque-card__overlay::after { opacity: 1; }
+
+/* sweep de luz diagonal */
+.destaque-card__media::after {
+  content: '';
+  position: absolute;
+  top: -120%; left: -40%;
+  width: 40%; height: 300%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  transform: rotate(22deg) translateX(-100%);
+  transition: transform 0.85s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.destaque-card:hover .destaque-card__media::after {
+  transform: rotate(22deg) translateX(600%);
+}
+
+/* ── rodapé do card ── */
+.destaque-card__footer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 18px 18px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  transform: translateY(6px);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.2,0.9,0.2,1), opacity 0.4s ease;
+}
+
+.destaque-card:hover .destaque-card__footer {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.destaque-card__index {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(245,237,226,0.50);
+}
+
+.destaque-card__mark {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(215,35,35,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.7);
+  transition: transform 0.35s cubic-bezier(0.2,0.9,0.2,1) 0.08s;
+}
+
+.destaque-card:hover .destaque-card__mark { transform: scale(1); }
+
+.destaque-card__mark svg {
+  width: 13px; height: 13px;
+  color: var(--white);
+}
+
+/* ── linha vermelha topo no hover ── */
+.destaque-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease);
+  z-index: 5;
+}
+
+.destaque-card:hover::before { transform: translateX(100%); }
+
+/* ── marca d'água "CONDADO" gigante no fundo ── */
+.destaque-card__brand-bg {
+  position: absolute;
+  bottom: -0.08em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 6.5vw, 76px);
+  letter-spacing: 6px;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.07);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  transition: -webkit-text-stroke 0.5s ease, letter-spacing 0.5s ease;
+}
+
+.destaque-card:hover .destaque-card__brand-bg {
+  -webkit-text-stroke: 1px rgba(215,35,35,0.22);
+  letter-spacing: 8px;
+}
+
+/* ── pílula de marca — aparece no hover, canto inferior esquerdo ── */
+.destaque-card__brand-pill {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2,0.9,0.2,1);
+}
+
+.destaque-card:hover .destaque-card__brand-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.destaque-card__brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.destaque-card__brand-name span {
+  color: var(--red);
+}
+
+.destaque-card__brand-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(245,237,226,0.55);
+  text-transform: uppercase;
+}
+
+/* ── rodapé abaixo do grid: chamada editorial ── */
+.destaques-footer {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.destaques-footer__text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: rgba(245,237,226,0.45);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.destaques-footer__text em {
+  color: var(--red);
+  font-style: italic;
+}
+
+.destaques-footer__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(245,237,226,0.55);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.destaques-footer__wa svg { width: 14px; height: 14px; color: var(--red); flex-shrink: 0; transition: color 0.3s ease; }
+
+.destaques-footer__wa:hover {
+  color: var(--white);
+  border-color: var(--red);
+  background: rgba(215,35,35,0.10);
+}
+
+.destaques-footer__wa:hover svg { color: var(--white); }
+
+/* ─── 7. CTA ─────────────────────────────────────────────── */
+
+.cta-section {
+  position: relative;
+  padding: 120px 0;
+  background: var(--black);
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(215,35,35,0.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.cta-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.cta-content { position: relative; z-index: 2; max-width: 540px; }
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 28px rgba(215,35,35,0.35);
+  transition: background 0.25s ease, transform 0.3s var(--ease), box-shadow 0.3s ease;
+}
+
+.btn-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.btn-cta:hover {
+  background: var(--red-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(215,35,35,0.45);
+}
+
+.cta-deco {
+  position: absolute;
+  right: -20px; top: 50%;
+  transform: translateY(-50%) translateX(40px);
+  z-index: 1;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease) 0.3s, transform 1.2s var(--ease) 0.3s;
+}
+
+.cta-wrap.in-view .cta-deco {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.cta-big-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 12vw, 200px);
+  letter-spacing: 6px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ─── 8. ANIMAÇÕES ───────────────────────────────────────── */
+
+.pro-card.in-view .pro-card__name {
+  animation: proNameReveal 0.75s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*120ms + 200ms) both;
+}
+
+@keyframes proNameReveal {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0% 0 0); }
+}
+
+.pro-card.in-view .pro-card__num {
+  animation: numBadge 0.5s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*120ms + 80ms) both;
+}
+
+@keyframes numBadge {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.pro-card.in-view .pro-card__bio {
+  animation: bioIn 0.7s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*120ms + 380ms) both;
+}
+
+@keyframes bioIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pro-card.in-view .pro-card__tags {
+  animation: bioIn 0.6s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*120ms + 500ms) both;
+}
+
+.valor-item.in-view {
+  animation: valorIn 0.8s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*140ms + 0.1s) both;
+}
+
+@keyframes valorIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* destaques: reveal com clip-path lateral em stagger */
+.destaque-card.in-view {
+  animation: destaqueReveal 0.9s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*150ms + 0.05s) both;
+}
+
+@keyframes destaqueReveal {
+  from { opacity: 0; transform: translateY(22px) scale(0.96); clip-path: inset(0 0 8% 0 round 18px); }
+  to   { opacity: 1; transform: translateY(0) scale(1);       clip-path: inset(0 0 0 0 round 18px); }
+}
+
+/* label da galeria */
+.destaques-label.in-view {
+  animation: fadeSlide 0.7s cubic-bezier(0.2,0.9,0.2,1) both;
+}
+
+.destaques-footer.in-view {
+  animation: fadeSlide 0.7s cubic-bezier(0.2,0.9,0.2,1) 0.3s both;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 9. RESPONSIVE ──────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .pro-card { grid-template-columns: 320px 1fr; }
+  .pro-card__body { padding: 36px; }
+}
+
+@media (max-width: 860px) {
+  .pro-card { grid-template-columns: 1fr; }
+  .pro-card__photo { min-height: 0; aspect-ratio: 3 / 4; }
+  .pro-card__overlay { background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.5) 100%); }
+  .pro-card__body { padding: 32px 28px 36px; }
+  .pro-card__name { font-size: clamp(32px, 7vw, 52px); }
+  .pro-card__bio  { max-width: 100%; }
+}
+
+@media (max-width: 980px) {
+  .profissionais { padding: 80px 0; }
+  .valores       { padding: 80px 0; }
+  .destaques     { padding: 80px 0; }
+  .cta-section   { padding: 80px 0; }
+
+  .valores-grid { grid-template-columns: 1fr; border-radius: 20px; }
+  .valor-item { border-right: none; border-bottom: 1px solid var(--line); padding: 36px 32px; }
+  .valor-item:last-child { border-bottom: none; }
+
+  .destaques-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  .cta-wrap { flex-direction: column; align-items: flex-start; }
+  .cta-deco { display: none; }
+}
+
+/* ── mobile: galeria vira carrossel horizontal com scroll-snap ── */
+@media (max-width: 720px) {
+  /* a seção quebra o padding lateral para o grid sangrar até a borda */
+  .destaques .container {
+    overflow: hidden;
+  }
+
+  /* label e footer continuam com o padding normal do container */
+  .destaques-label,
+  .destaques-footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* grid vira faixa de scroll horizontal */
+  .destaques-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* sangra para fora do container em ambos os lados */
+    margin-left: calc(-1 * var(--container-pad, 24px));
+    margin-right: calc(-1 * var(--container-pad, 24px));
+    padding-left: var(--container-pad, 24px);
+    padding-right: var(--container-pad, 24px);
+    /* esconde a barra de scroll nativa — visual limpo */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* impede clip da animação de entrada */
+    padding-bottom: 8px;
+    margin-bottom: -8px;
+  }
+
+  .destaques-grid::-webkit-scrollbar { display: none; }
+
+  /* cada card tem largura fixa generosa — cabeça inteira visível */
+  .destaque-card {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+    /* desativa o tilt 3D no touch — transform seria sobrescrito pelo JS mesmo */
+    transform: none !important;
+    border-radius: 16px;
+  }
+
+  /* último card tem padding extra à direita para não grudar na borda */
+  .destaque-card:last-child {
+    margin-right: var(--container-pad, 24px);
+  }
+
+  /* aspecto portrait confortável — rosto bem visível */
+  .destaque-card__media {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* no touch o rodapé fica sempre visível (não há hover) */
+  .destaque-card__footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* dots indicadores de scroll */
+  .destaques-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 18px;
+  }
+
+  .destaques-dots__dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(245,237,226,0.20);
+    transition: background 0.3s ease, width 0.3s ease;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .destaques-dots__dot.active {
+    background: var(--red);
+    width: 18px;
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 400px) {
+  .destaque-card { flex: 0 0 82vw; }
+}
+
+@media (max-width: 560px) {
+  .pro-card__photo { aspect-ratio: 3 / 4; }
+  .pro-card__body  { padding: 24px 20px 28px; }
+  .pro-card__name  { font-size: 32px; }
+  .valor-item { padding: 28px 24px; }
+  .cta-actions { flex-direction: column; align-items: flex-start; }
+  .btn-cta     { width: 100%; justify-content: center; }
+}
+
+/* ─── 10. REDUCED MOTION ─────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .pro-card, .pro-card__name, .pro-card__num, .pro-card__bio,
+  .pro-card__tags, .valor-item, .destaque-card,
+  .destaques-label, .destaques-footer, .cta-deco {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .pro-card__name::after { width: 100%; }
+}
