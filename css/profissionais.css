@@ -1,9 +1,7 @@
-/* ============================================================
-   CONDADO BARBEARIA — profissionais.css v4
-   Estende index.css — sem repetir tokens, reset ou utilitários.
-   ============================================================ */
+/* profissionais.css — estilos exclusivos da página de profissionais.
+   Estende index.css — não repete tokens, reset ou utilitários globais. */
 
-/* ─── 1. HERO INNER ──────────────────────────────────────── */
+/* ─── Hero da página (variante compacta sem banner próprio) ─────────────── */
 
 .hero--inner {
   min-height: 56vh;
@@ -30,7 +28,7 @@
   .hero-content--inner { padding: 32px 28px 56px; }
 }
 
-/* ─── 2. PROFISSIONAIS ───────────────────────────────────── */
+/* ─── Seção de profissionais ────────────────────────────────────────────── */
 
 .profissionais {
   position: relative;
@@ -49,7 +47,7 @@
   pointer-events: none;
 }
 
-/* ─── 3. TEAM GRID ───────────────────────────────────────── */
+/* ─── Grid de cards da equipe ───────────────────────────────────────────── */
 
 .team-grid {
   display: flex;
@@ -59,7 +57,7 @@
   z-index: 1;
 }
 
-/* ─── 4. PRO CARD ────────────────────────────────────────── */
+/* ─── Card de profissional ──────────────────────────────────────────────── */
 
 .pro-card {
   position: relative;
@@ -294,7 +292,7 @@
 
 .pro-card__cta:hover svg { color: var(--white); }
 
-/* ─── 5. VALORES ─────────────────────────────────────────── */
+/* ─── Seção de valores ──────────────────────────────────────────────────── */
 
 .valores {
   position: relative;
@@ -373,7 +371,7 @@
   color: rgba(245,237,226,0.58);
 }
 
-/* ─── 6. DESTAQUES — galeria editorial horizontal ────────── */
+/* ─── Galeria de destaques (grid → carrossel no mobile) ─────────────────── */
 
 .destaques {
   position: relative;
@@ -703,7 +701,7 @@
 
 .destaques-footer__wa:hover svg { color: var(--white); }
 
-/* ─── 7. CTA ─────────────────────────────────────────────── */
+/* ─── CTA final ─────────────────────────────────────────────────────────── */
 
 .cta-section {
   position: relative;
@@ -789,7 +787,7 @@
   white-space: nowrap;
 }
 
-/* ─── 8. ANIMAÇÕES ───────────────────────────────────────── */
+/* ─── Animações de entrada ──────────────────────────────────────────────── */
 
 .pro-card.in-view .pro-card__name {
   animation: proNameReveal 0.75s cubic-bezier(0.2,0.9,0.2,1) calc(var(--i,0)*120ms + 200ms) both;
@@ -855,7 +853,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── 9. RESPONSIVE ──────────────────────────────────────── */
+/* ─── Responsive ────────────────────────────────────────────────────────── */
 
 @media (max-width: 1100px) {
   .pro-card { grid-template-columns: 320px 1fr; }
@@ -989,7 +987,7 @@
   .btn-cta     { width: 100%; justify-content: center; }
 }
 
-/* ─── 10. REDUCED MOTION ─────────────────────────────────── */
+/* ─── Movimento reduzido ────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   .pro-card, .pro-card__name, .pro-card__num, .pro-card__bio,

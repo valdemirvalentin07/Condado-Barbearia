@@ -1,13 +1,13 @@
-/* ============================================================
-   CONDADO BARBEARIA — cortes.css
-   ============================================================ */
+/* cortes.css — estilos exclusivos da página de cortes.
+   Estende index.css — não repete tokens, reset ou utilitários globais. */
 
-/* ─── PAGE HERO ─── */
+/* ─── Hero da página ─────────────────────────────────────────────────────────── */
+
 .page-hero {
   position: relative;
   min-height: 52vh;
   display: flex;
-  align-items: stretch;        /* inner ocupa toda a altura */
+  align-items: stretch;
   padding: 160px 0 60px;
   overflow: hidden;
   isolation: isolate;
@@ -22,6 +22,7 @@
   z-index: -1;
 }
 
+/* Grain de textura sobre o banner */
 .page-hero-bg::after {
   content: '';
   position: absolute;
@@ -38,13 +39,10 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  text-align: left;
-  /* título no topo, descrição empurrada para o rodapé */
   flex: 1;
   justify-content: space-between;
 }
 
-/* empurra a descrição para longe do título — space-between faz o resto */
 .page-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -56,10 +54,9 @@
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 22px;
+  align-self: flex-start;
   opacity: 0;
   animation: fadeUp 0.9s 0.3s cubic-bezier(0.2,0.9,0.2,1) forwards;
-  /* fica no topo — sem margin-top extra */
-  align-self: flex-start;
 }
 
 .eyebrow-line {
@@ -78,7 +75,6 @@
   letter-spacing: 2px;
   color: var(--white);
   text-shadow: 0 4px 30px rgba(0,0,0,0.5);
-  margin-bottom: 0;           /* space-between cuida do espaço */
   align-self: flex-start;
 }
 
@@ -86,66 +82,54 @@
   display: block;
   overflow: hidden;
 }
+
 .page-title .line > * {
   display: inline-block;
   transform: translateY(110%);
   animation: lineRise 1s cubic-bezier(0.2,0.9,0.2,1) forwards;
 }
+
 .page-title .line:nth-child(1) > * { animation-delay: 0.45s; }
 .page-title .line:nth-child(2) > * { animation-delay: 0.6s; }
-.page-title .line                   { animation: lineRise 1s cubic-bezier(0.2,0.9,0.2,1) both; }
-.page-title .line:nth-child(1)      { animation-delay: 0.45s; }
-.page-title .line:nth-child(2)      { animation-delay: 0.6s; }
+.page-title .line:nth-child(1)      { animation: lineRise 1s 0.45s cubic-bezier(0.2,0.9,0.2,1) both; }
+.page-title .line:nth-child(2)      { animation: lineRise 1s 0.60s cubic-bezier(0.2,0.9,0.2,1) both; }
 
+/* Texto descritivo com barra vermelha lateral animada */
 .page-desc {
   position: relative;
   max-width: 420px;
   font-size: 14px;
   line-height: 1.72;
   color: rgba(245,237,226,0.78);
-  text-align: left;
-
-  /* entrada animada */
-  opacity: 0;
-  transform: translateX(-18px);
-  animation: fadeUpLeft 1s 0.85s cubic-bezier(0.2,0.9,0.2,1) forwards;
-
-  /* espaço interno para a linha vermelha não colar no texto */
   padding: 6px 10px 6px 12px;
   overflow: hidden;
   border-radius: 4px;
+  opacity: 0;
+  transform: translateX(-18px);
+  animation: fadeUpLeft 1s 0.85s cubic-bezier(0.2,0.9,0.2,1) forwards;
 }
 
-/* linha vermelha vertical à esquerda */
+/* Barra vermelha vertical à esquerda */
 .page-desc::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 2px;
   height: 100%;
   background: var(--red);
   transform: scaleY(0);
   transform-origin: bottom;
-  /* aguarda a animação de entrada terminar (0.85s + 1s = ~1.85s) */
   animation: lineGrowY 0.5s 1.85s cubic-bezier(0.2,0.9,0.2,1) forwards;
   border-radius: 1px;
 }
 
-/* fundo highlight que desliza da esquerda */
+/* Highlight vermelho que desliza da esquerda */
 .page-desc::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(215,35,35,0.18) 0%,
-    rgba(215,35,35,0.06) 55%,
-    transparent 100%
-  );
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, rgba(215,35,35,0.18) 0%, rgba(215,35,35,0.06) 55%, transparent 100%);
   transform: translateX(-105%);
   animation: highlightSlide 0.7s 2s cubic-bezier(0.2,0.9,0.2,1) forwards;
   z-index: -1;
@@ -160,6 +144,11 @@
 @keyframes highlightSlide {
   from { transform: translateX(-105%); }
   to   { transform: translateX(0); }
+}
+
+@keyframes fadeUpLeft {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .page-hero-scroll {
@@ -177,20 +166,16 @@
   opacity: 0;
   animation: fadeUp 1s 1.2s cubic-bezier(0.2,0.9,0.2,1) forwards;
 }
+
 .page-hero-scroll span {
-  width: 3px;
-  height: 7px;
+  width: 3px; height: 7px;
   background: var(--red);
   border-radius: 3px;
   animation: scrollDot 1.8s ease-in-out infinite;
 }
 
-@keyframes fadeUpLeft {
-  from { opacity: 0; transform: translateX(-18px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+/* ─── Seção do carrossel ──────────────────────────────────────────────────────── */
 
-/* ─── CAROUSEL SECTION ─── */
 .carousel-section {
   padding: 100px 0 80px;
   background: var(--black);
@@ -208,6 +193,7 @@
   pointer-events: none;
 }
 
+/* Underline animado no eyebrow — cresce via JS ao entrar na viewport */
 .carousel-section .section-eyebrow {
   position: relative;
   display: inline-block;
@@ -217,10 +203,8 @@
 .carousel-section .section-eyebrow::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
   background: var(--red);
   transform-origin: left;
   transform: scaleX(0);
@@ -231,7 +215,8 @@
   transform: scaleX(1);
 }
 
-/* ─── VIEWPORT ─── */
+/* ─── Viewport do carrossel ───────────────────────────────────────────────────── */
+
 .carousel-viewport {
   position: relative;
   width: 100%;
@@ -239,20 +224,25 @@
   margin-top: 52px;
   cursor: grab;
   user-select: none;
+  /* pan-y permite scroll vertical sem interferir com o drag horizontal */
+  touch-action: pan-y;
 }
 
 .carousel-viewport:active { cursor: grabbing; }
 
-/* ─── TRACK ─── */
+/* ─── Track ───────────────────────────────────────────────────────────────────── */
+
 .carousel-track {
   display: flex;
   gap: 20px;
-  padding: 0 calc((100vw - min(1200px, 90vw)) / 2);
+  /* 100dvw evita o bug de scrollbar no Android (100vw pode incluir a scrollbar) */
+  padding: 0 calc((100dvw - min(1200px, 90dvw)) / 2);
   transition: transform 0.6s cubic-bezier(0.2,0.9,0.2,1);
   will-change: transform;
 }
 
-/* ─── SLIDE ─── */
+/* ─── Slide ───────────────────────────────────────────────────────────────────── */
+
 .carousel-slide {
   flex: 0 0 420px;
   height: 560px;
@@ -261,9 +251,9 @@
   position: relative;
   border: 1px solid var(--line);
   transition:
-    transform 0.5s cubic-bezier(0.2,0.9,0.2,1),
-    border-color 0.4s ease,
-    box-shadow 0.5s ease;
+    transform      0.5s cubic-bezier(0.2,0.9,0.2,1),
+    border-color   0.4s ease,
+    box-shadow     0.5s ease;
 }
 
 .carousel-slide:hover {
@@ -272,9 +262,11 @@
   box-shadow: 0 24px 60px rgba(0,0,0,0.45);
 }
 
-/* Featured */
-.carousel-slide--featured { border-color: rgba(215,35,35,0.28); }
+.carousel-slide--featured {
+  border-color: rgba(215,35,35,0.28);
+}
 
+/* Borda interna do slide em destaque */
 .carousel-slide--featured::after {
   content: '';
   position: absolute;
@@ -285,7 +277,8 @@
   z-index: 3;
 }
 
-/* ─── MÍDIA ─── */
+/* ─── Mídia do slide ──────────────────────────────────────────────────────────── */
+
 .slide-media {
   position: absolute;
   inset: 0;
@@ -296,8 +289,7 @@
 .slide-media video {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
@@ -305,58 +297,36 @@
   z-index: 1;
 }
 
-.slide-media-placeholder {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 40%, rgba(215,35,35,0.18) 0%, transparent 55%),
-    #0e0808;
-  z-index: 0;
-}
-
-/* ─── OVERLAY ─── */
 .slide-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,0.96) 0%,
-      rgba(0,0,0,0.65) 38%,
-      rgba(0,0,0,0.18) 68%,
-      rgba(0,0,0,0.06) 100%
-    );
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.96) 0%,
+    rgba(0,0,0,0.65) 38%,
+    rgba(0,0,0,0.18) 68%,
+    rgba(0,0,0,0.06) 100%
+  );
   transition: opacity 0.4s ease;
 }
 
-/* reforça o overlay no hover para destacar o texto */
-.carousel-slide:hover .slide-overlay {
-  opacity: 1;
-}
+/* ─── Conteúdo do slide ───────────────────────────────────────────────────────── */
 
-/* ─── CONTEÚDO ─────────────────────────────────────────────
-   Layout: flex column, conteúdo fixado no canto
-   inferior esquerdo via justify-content: flex-end.
-───────────────────────────────────────────────────────── */
 .slide-content {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  /* número (slide-top) fica no topo, tudo mais no fundo */
   justify-content: space-between;
   padding: 22px 24px 26px;
-  text-align: left;
 }
 
-/* Topo — apenas o número e badge */
 .slide-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  align-self: flex-start;
   width: 100%;
 }
 
@@ -386,17 +356,14 @@
   border-radius: 999px;
 }
 
-/* ─── BLOCO INFERIOR — canto esquerdo inferior ── */
 .slide-bottom {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;     /* alinha à esquerda */
+  align-items: flex-start;
   gap: 6px;
-  /* pequeno padding-right para a descrição não colar na borda */
   padding-right: 12px;
 }
 
-/* Título */
 .slide-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 40px;
@@ -404,49 +371,28 @@
   color: var(--white);
   line-height: 0.95;
   text-shadow: 0 2px 16px rgba(0,0,0,0.6);
-  text-align: left;
 }
 
-/* ─── DESCRIÇÃO com animação de highlight vermelho ──────
-   Técnica: ::before pseudo-element que desliza da
-   esquerda para a direita ao hover no slide,
-   combinado com a transição de cor do próprio texto.
-   Resultado: fundo vermelho translúcido revela as
-   palavras da esquerda para a direita, como um
-   marcador de texto animado.
-───────────────────────────────────────────────────────── */
+/* Descrição com highlight vermelho animado no hover do slide pai */
 .slide-desc {
   position: relative;
   font-size: 12.5px;
   line-height: 1.62;
-  /* cor de repouso: branco acinzentado */
   color: rgba(245,237,226,0.62);
   max-width: 270px;
-  text-align: left;
-  /* clip para o pseudo não vazar */
   overflow: hidden;
   border-radius: 3px;
   padding: 4px 6px 4px 0;
-
-  /* transição de cor do texto */
   transition: color 0.35s ease 0.1s;
 }
 
-/* fundo que desliza — highlight vermelho */
+/* Fundo que desliza da esquerda — efeito de marcador de texto */
 .slide-desc::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(215,35,35,0.22) 0%,
-    rgba(215,35,35,0.10) 60%,
-    transparent 100%
-  );
-  /* começa fora da esquerda */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, rgba(215,35,35,0.22) 0%, rgba(215,35,35,0.10) 60%, transparent 100%);
   transform: translateX(-105%);
   transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.2, 1);
   z-index: -1;
@@ -454,14 +400,12 @@
   pointer-events: none;
 }
 
-/* linha vermelha à esquerda — régua de destaque */
+/* Linha vermelha à esquerda — régua de destaque */
 .slide-desc::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
   background: var(--red);
   transform: scaleY(0);
   transform-origin: top;
@@ -469,24 +413,17 @@
   border-radius: 1px;
 }
 
-/* --- Disparo das animações ao hover no slide pai --- */
 .carousel-slide:hover .slide-desc {
-  color: rgba(245,237,226,0.92);   /* texto mais brilhante */
-  padding-left: 8px;               /* recua para dar espaço à linha */
-  transition:
-    color      0.35s ease 0.1s,
-    padding-left 0.4s cubic-bezier(0.2,0.9,0.2,1);
+  color: rgba(245,237,226,0.92);
+  padding-left: 8px;
+  transition: color 0.35s ease 0.1s, padding-left 0.4s cubic-bezier(0.2,0.9,0.2,1);
 }
 
-.carousel-slide:hover .slide-desc::before {
-  transform: translateX(0);        /* highlight entra da esquerda */
-}
+.carousel-slide:hover .slide-desc::before { transform: translateX(0); }
+.carousel-slide:hover .slide-desc::after  { transform: scaleY(1); }
 
-.carousel-slide:hover .slide-desc::after {
-  transform: scaleY(1);            /* linha vermelha cresce do topo */
-}
+/* ─── Preço do slide ──────────────────────────────────────────────────────────── */
 
-/* ─── PREÇO ─── */
 .slide-price {
   font-family: 'Playfair Display', serif;
   font-style: italic;
@@ -494,10 +431,10 @@
   color: var(--cream);
   margin-top: 6px;
   display: block;
-  text-align: left;
   transition: color 0.3s ease;
 }
 
+/* Linha vermelha que cresce antes do preço no hover */
 .slide-price::before {
   content: '';
   display: block;
@@ -508,16 +445,11 @@
   transition: width 0.5s cubic-bezier(0.2,0.9,0.2,1) 0.2s;
 }
 
-/* linha do preço cresce no hover */
-.carousel-slide:hover .slide-price::before {
-  width: 32px;
-}
+.carousel-slide:hover .slide-price::before { width: 32px; }
+.carousel-slide:hover .slide-price         { color: var(--white); }
 
-.carousel-slide:hover .slide-price {
-  color: var(--white);
-}
+/* ─── Controles do carrossel ──────────────────────────────────────────────────── */
 
-/* ─── CONTROLES ─── */
 .carousel-controls {
   display: flex;
   align-items: center;
@@ -548,9 +480,7 @@
   background: var(--red);
 }
 
-.carousel-dot:hover:not(.is-active) {
-  background: rgba(245,237,226,0.45);
-}
+.carousel-dot:hover:not(.is-active) { background: rgba(245,237,226,0.45); }
 
 .carousel-arrows { display: flex; gap: 10px; }
 
@@ -565,9 +495,9 @@
   cursor: pointer;
   color: var(--cream);
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.3s cubic-bezier(0.2,0.9,0.2,1);
+    background    0.3s ease,
+    border-color  0.3s ease,
+    transform     0.3s cubic-bezier(0.2,0.9,0.2,1);
 }
 
 .carousel-arrow svg { width: 18px; height: 18px; }
@@ -583,11 +513,13 @@
   pointer-events: none;
 }
 
-/* ─── TABELA SECTION ─── */
+/* ─── Seção da tabela de preços ───────────────────────────────────────────────── */
+
 .tabela-section {
   padding: 80px 0;
   background: var(--black);
   position: relative;
+  overflow: hidden;
 }
 
 .tabela-section::before {
@@ -636,13 +568,10 @@
 }
 
 .tabela tbody tr:last-child td { border-bottom: none; }
-.tabela tbody tr { transition: background 0.25s ease; }
-.tabela tbody tr:hover { background: rgba(255,255,255,0.02); }
+.tabela tbody tr               { transition: background 0.25s ease; }
+.tabela tbody tr:hover         { background: rgba(255,255,255,0.02); }
 
-.t-featured td {
-  color: var(--white);
-  background: rgba(215,35,35,0.05);
-}
+.t-featured td       { color: var(--white); background: rgba(215,35,35,0.05); }
 .t-featured td.t-price { color: var(--cream); }
 
 .t-price {
@@ -655,8 +584,7 @@
 
 .t-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: rgba(255,255,255,0.18);
   margin-right: 10px;
@@ -667,7 +595,8 @@
 
 .t-dot--red { background: var(--red); }
 
-/* ─── CTA SECTION ─── */
+/* ─── CTA ─────────────────────────────────────────────────────────────────────── */
+
 .cta-section {
   padding: 120px 0;
   background: var(--black);
@@ -678,11 +607,9 @@
 .cta-section::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 400px;
+  width: 800px; height: 400px;
   background: radial-gradient(ellipse, rgba(215,35,35,0.12) 0%, transparent 65%);
   filter: blur(60px);
   pointer-events: none;
@@ -749,66 +676,57 @@
   box-shadow: 0 14px 40px rgba(215,35,35,0.5);
 }
 
-/* ─── RESPONSIVE CAROUSEL ─── */
+/* ─── Responsive ──────────────────────────────────────────────────────────────── */
+
 @media (max-width: 980px) {
-  .carousel-slide { flex: 0 0 340px; height: 480px; }
-  .slide-title    { font-size: 36px; }
-  .carousel-track { padding: 0 24px; }
+  .carousel-slide  { flex: 0 0 340px; height: 480px; }
+  .slide-title     { font-size: 36px; }
+  .carousel-track  { padding: 0 24px; }
+  .page-hero       { padding: 130px 0 48px; }
+  .tabela th,
+  .tabela td       { padding: 14px 18px; }
 }
 
 @media (max-width: 640px) {
-  .carousel-section { padding: 70px 0 60px; }
-  .carousel-slide   { flex: 0 0 calc(100vw - 48px); height: 440px; }
-  .carousel-track   { padding: 0 24px; gap: 16px; }
-  .slide-title      { font-size: 38px; }
+  .carousel-section  { padding: 70px 0 60px; }
+  .carousel-slide    { flex: 0 0 calc(100dvw - 48px); height: 440px; }
+  .carousel-track    { padding: 0 24px; gap: 16px; }
+  .slide-title       { font-size: 38px; }
   .carousel-controls { margin-top: 24px; }
-}
-
-/* ─── RESPONSIVE GERAL ─── */
-@media (max-width: 980px) {
-  .page-hero { padding: 130px 0 48px; }
-  .tabela th, .tabela td { padding: 14px 18px; }
-}
-
-@media (max-width: 640px) {
-  .page-hero        { padding: 110px 0 36px; min-height: auto; }
-  .page-hero-scroll { display: none; }
+  .page-hero         { padding: 110px 0 36px; min-height: auto; }
+  .page-hero-scroll  { display: none; }
   .tabela th:nth-child(2),
   .tabela td:nth-child(2) { display: none; }
-  .tabela th, .tabela td  { padding: 14px 16px; }
-  .cta-section { padding: 80px 0; }
+  .tabela th,
+  .tabela td         { padding: 14px 16px; }
+  .cta-section       { padding: 80px 0; }
 }
 
-/* ─── REDUCED MOTION ─── */
+/* ─── Movimento reduzido ──────────────────────────────────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
   .page-eyebrow,
   .page-desc,
-  .page-hero-scroll {
-    opacity: 1;
-    animation: none;
-  }
+  .page-hero-scroll  { opacity: 1; animation: none; }
+
   .page-title .line,
-  .page-title .line > * {
-    animation: none;
-    transform: none;
-  }
+  .page-title .line > * { animation: none; transform: none; }
+
   .eyebrow-line { width: 32px; animation: none; }
+
   .carousel-track,
   .carousel-slide,
   .carousel-dot,
   .carousel-arrow { transition: none; }
-  .carousel-section .section-eyebrow::after {
-    transition: none;
-    transform: scaleX(1);
-  }
+
+  .carousel-section .section-eyebrow::after { transition: none; transform: scaleX(1); }
+
   .slide-desc,
   .slide-desc::before,
   .slide-desc::after,
   .slide-price,
-  .slide-price::before {
-    transition: none;
-    transform: none;
-  }
+  .slide-price::before { transition: none; transform: none; }
+
   .carousel-slide:hover .slide-desc::before { transform: translateX(0); }
   .carousel-slide:hover .slide-desc::after  { transform: scaleY(1); }
   .carousel-slide:hover .slide-price::before { width: 32px; }

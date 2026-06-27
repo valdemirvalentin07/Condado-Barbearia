@@ -1,23 +1,21 @@
-/* ============================================================
-   CONDADO BARBEARIA — cortes.js
-   Scripts exclusivos da página de cortes
-   ============================================================ */
-
 (function () {
   'use strict';
 
-  const PRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PRM      = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const IS_TOUCH = navigator.maxTouchPoints > 0;
 
-  /* ─── NAVBAR (reusa a lógica do index.js via id mobileToggle) ─── */
-  // index.js já inicializa o toggle; só garantimos o footer year
+  // ─── Ano no footer ──────────────────────────────────────────────────────────
+
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ─── PRICE COUNTER — tabela ─── */
+  // ─── Contador animado nos preços (cards + tabela) ────────────────────────────
+
   const animateCounter = (el) => {
     const text   = el.textContent.trim();
     const match  = text.match(/\d+/);
     if (!match) return;
+
     const target   = parseInt(match[0], 10);
     const prefix   = text.slice(0, text.indexOf(match[0]));
     const suffix   = text.slice(text.indexOf(match[0]) + match[0].length);
@@ -30,6 +28,7 @@
       el.textContent = `${prefix}${Math.round(ease(progress) * target)}${suffix}`;
       if (progress < 1) requestAnimationFrame(step);
     };
+
     requestAnimationFrame(step);
   };
 
@@ -46,8 +45,7 @@
     document.querySelectorAll('.corte-price, .t-price').forEach((el) => priceObs.observe(el));
   }
 
-  /* ─── CARD SHINE (3D tilt) ─── */
-  const IS_TOUCH = navigator.maxTouchPoints > 0;
+  // ─── Tilt 3D leve nos cards de corte ─────────────────────────────────────────
 
   if (!PRM && !IS_TOUCH) {
     document.querySelectorAll('.corte-card').forEach((card) => {
@@ -69,10 +67,11 @@
     });
   }
 
-  /* ─── TABELA ROW STAGGER ON ENTER ─── */
+  // ─── Linhas da tabela entram em stagger ao rolar ──────────────────────────────
+
   if (!PRM && 'IntersectionObserver' in window) {
-    const rows = document.querySelectorAll('.tabela tbody tr');
-    const obs  = new IntersectionObserver((entries) => {
+    const rows   = document.querySelectorAll('.tabela tbody tr');
+    const tblObs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         rows.forEach((row, i) => {
           row.style.opacity   = '0';
@@ -83,83 +82,17 @@
             row.style.transform  = 'translateX(0)';
           }, i * 70);
         });
-        obs.disconnect();
+        tblObs.disconnect();
       }
     }, { threshold: 0.2 });
 
-    const table = document.querySelector('.tabela-wrap');
-    if (table) obs.observe(table);
+    const tableWrap = document.querySelector('.tabela-wrap');
+    if (tableWrap) tblObs.observe(tableWrap);
   }
 
-})();
-
-(function () {
-  'use strict';
-
-  const PRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ─── FOOTER YEAR ─── */
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ─── PRICE COUNTER — tabela ─── */
-  const animateCounter = (el) => {
-    const text   = el.textContent.trim();
-    const match  = text.match(/\d+/);
-    if (!match) return;
-    const target   = parseInt(match[0], 10);
-    const prefix   = text.slice(0, text.indexOf(match[0]));
-    const suffix   = text.slice(text.indexOf(match[0]) + match[0].length);
-    const duration = 800;
-    const start    = performance.now();
-    const ease     = (t) => 1 - Math.pow(1 - t, 3);
-
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      el.textContent = `${prefix}${Math.round(ease(progress) * target)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-
-  if (!PRM && 'IntersectionObserver' in window) {
-    const priceObs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          animateCounter(e.target);
-          priceObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.8 });
-
-    document.querySelectorAll('.t-price').forEach((el) => priceObs.observe(el));
-  }
-
-  /* ─── TABELA ROW STAGGER ON ENTER ─── */
-  if (!PRM && 'IntersectionObserver' in window) {
-    const rows = document.querySelectorAll('.tabela tbody tr');
-    const obs  = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        rows.forEach((row, i) => {
-          row.style.opacity   = '0';
-          row.style.transform = 'translateX(-14px)';
-          setTimeout(() => {
-            row.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.2,0.9,0.2,1)';
-            row.style.opacity    = '1';
-            row.style.transform  = 'translateX(0)';
-          }, i * 70);
-        });
-        obs.disconnect();
-      }
-    }, { threshold: 0.2 });
-
-    const table = document.querySelector('.tabela-wrap');
-    if (table) obs.observe(table);
-  }
-
-  
-   /* Carrossel*/
-
+  // ─── Carrossel de cortes ──────────────────────────────────────────────────────
+  // Mesma lógica de detecção de eixo do fb-carousel do index.js:
+  // só bloqueia o scroll nativo quando o gesto é claramente horizontal.
 
   const track    = document.getElementById('carouselTrack');
   const dotsWrap = document.getElementById('carouselDots');
@@ -168,53 +101,62 @@
 
   if (!track || !dotsWrap || !btnPrev || !btnNext) return;
 
-  const slides    = Array.from(track.querySelectorAll('.carousel-slide'));
-  const TOTAL     = slides.length;
-  let   current   = 0;
-  let   isDragging  = false;
-  let   startX      = 0;
-  let   startScroll = 0;
-  let   hasDragged  = false;
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const TOTAL  = slides.length;
 
-  /* Quantos slides visíveis por breakpoint */
-  function getVisibleCount () {
+  let current      = 0;
+  let isDragging   = false;
+  let startX       = 0;
+  let startY       = 0;
+  let startOff     = 0;
+  let hasDragged   = false;
+  let isHorizontal = null;
+
+  const getVisible = () => {
     if (window.innerWidth <= 640)  return 1;
     if (window.innerWidth <= 980)  return 2;
     return 3;
-  }
+  };
 
-  /* Largura de um slide + gap */
-  function slideStride () {
+  const slideStride = () => {
     const gap = window.innerWidth <= 640 ? 16 : 20;
     return slides[0].getBoundingClientRect().width + gap;
-  }
+  };
 
-  /* Ir para índice */
-  function goTo (index, instant) {
-    const maxIndex = Math.max(0, TOTAL - getVisibleCount());
-    current = Math.max(0, Math.min(index, maxIndex));
-
+  const goTo = (index, instant = false) => {
+    const max = Math.max(0, TOTAL - getVisible());
+    current   = Math.max(0, Math.min(index, max));
     const offset = current * slideStride();
 
     if (instant || PRM) {
       track.style.transition = 'none';
       track.style.transform  = `translateX(-${offset}px)`;
-      track.getBoundingClientRect(); // força reflow
+      track.getBoundingClientRect();
       track.style.transition = '';
     } else {
       track.style.transform = `translateX(-${offset}px)`;
     }
 
-    updateDots();
-    updateArrows();
-  }
+    syncUI();
+  };
 
-  /* Dots */
-  function buildDots () {
+  const syncUI = () => {
+    const max = Math.max(0, TOTAL - getVisible());
+
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('is-active', i === current);
+      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+    });
+
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current >= max;
+  };
+
+  const buildDots = () => {
     dotsWrap.innerHTML = '';
-    const maxIndex = Math.max(0, TOTAL - getVisibleCount());
+    const max = Math.max(0, TOTAL - getVisible());
 
-    for (let i = 0; i <= maxIndex; i++) {
+    for (let i = 0; i <= max; i++) {
       const btn = document.createElement('button');
       btn.className = 'carousel-dot';
       btn.setAttribute('role', 'tab');
@@ -224,96 +166,99 @@
       dotsWrap.appendChild(btn);
     }
 
-    updateDots();
-  }
+    syncUI();
+  };
 
-  function updateDots () {
-    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
-      d.classList.toggle('is-active', i === current);
-      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
-    });
-  }
-
-  function updateArrows () {
-    const maxIndex   = Math.max(0, TOTAL - getVisibleCount());
-    btnPrev.disabled = current === 0;
-    btnNext.disabled = current >= maxIndex;
-  }
-
-  /* Botões */
   btnPrev.addEventListener('click', () => goTo(current - 1));
   btnNext.addEventListener('click', () => goTo(current + 1));
 
-  /* Teclado — só ativa quando o carrossel está visível */
+  // Teclas só quando o carrossel está visível
   document.addEventListener('keydown', (e) => {
-    const viewport = document.querySelector('.carousel-viewport');
-    if (!viewport) return;
-    const rect   = viewport.getBoundingClientRect();
+    const vp   = document.querySelector('.carousel-viewport');
+    if (!vp) return;
+    const rect   = vp.getBoundingClientRect();
     const inView = rect.top < window.innerHeight && rect.bottom > 0;
     if (!inView) return;
     if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
   });
 
-  /* Drag / Swipe com Pointer Events */
   const viewport = document.querySelector('.carousel-viewport');
+  if (!viewport) return;
 
-  function onPointerDown (e) {
+  viewport.addEventListener('pointerdown', (e) => {
     if (e.button !== 0 && e.pointerType !== 'touch') return;
-    isDragging  = true;
-    hasDragged  = false;
-    startX      = e.clientX;
-    startScroll = current * slideStride();
+    isDragging   = true;
+    hasDragged   = false;
+    isHorizontal = null;
+    startX       = e.clientX;
+    startY       = e.clientY;
+    startOff     = current * slideStride();
     track.style.transition = 'none';
     viewport.setPointerCapture(e.pointerId);
-  }
+  });
 
-  function onPointerMove (e) {
+  viewport.addEventListener('pointermove', (e) => {
     if (!isDragging) return;
-    const delta = e.clientX - startX;
-    if (Math.abs(delta) > 4) hasDragged = true;
-    track.style.transform = `translateX(-${startScroll - delta}px)`;
-  }
 
-  function onPointerUp (e) {
+    const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+
+    if (isHorizontal === null && (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4)) {
+      isHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
+    }
+
+    // Gesto vertical: cancela o drag e deixa a página rolar normalmente
+    if (isHorizontal === false) {
+      isDragging = false;
+      track.style.transition = '';
+      track.style.transform  = `translateX(-${startOff}px)`;
+      return;
+    }
+
+    if (isHorizontal) {
+      e.preventDefault();
+      if (Math.abs(deltaX) > 4) hasDragged = true;
+      track.style.transform = `translateX(-${startOff - deltaX}px)`;
+    }
+  }, { passive: false });
+
+  viewport.addEventListener('pointerup', (e) => {
     if (!isDragging) return;
     isDragging = false;
     track.style.transition = '';
-    const delta = e.clientX - startX;
+
+    const deltaX = e.clientX - startX;
     if (hasDragged) {
-      if (delta < -60)      goTo(current + 1);
-      else if (delta > 60)  goTo(current - 1);
+      if (deltaX < -60)     goTo(current + 1);
+      else if (deltaX > 60) goTo(current - 1);
       else                  goTo(current);
     }
-  }
+  });
 
-  viewport.addEventListener('pointerdown',   onPointerDown);
-  viewport.addEventListener('pointermove',   onPointerMove);
-  viewport.addEventListener('pointerup',     onPointerUp);
   viewport.addEventListener('pointercancel', () => {
     if (isDragging) { isDragging = false; goTo(current); }
   });
 
-  /* Bloqueia clique após arrastar */
+  // Bloqueia o click disparado imediatamente após um drag
   viewport.addEventListener('click', (e) => {
     if (hasDragged) e.stopPropagation();
   }, true);
 
-  /* Eyebrow underline ao entrar na viewport */
+  // Eyebrow underline ao entrar na viewport
   const eyebrow = document.querySelector('.carousel-section .section-eyebrow');
   if (eyebrow && 'IntersectionObserver' in window) {
-    const obsEyebrow = new IntersectionObserver((entries) => {
+    const eyeObs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         eyebrow.classList.add('is-visible');
-        obsEyebrow.disconnect();
+        eyeObs.disconnect();
       }
     }, { threshold: 0.5 });
-    obsEyebrow.observe(eyebrow);
+    eyeObs.observe(eyebrow);
   } else if (eyebrow) {
     eyebrow.classList.add('is-visible');
   }
 
-  /* Resize — reconstrói dots e reposiciona */
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -323,7 +268,6 @@
     }, 150);
   });
 
-  /* Init */
   buildDots();
   goTo(0, true);
 
